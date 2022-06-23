@@ -4,16 +4,17 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Document</title>
   </head>
   <style>
     body {
         font-family: arial, sans-serif;
+        background-color: rgb(135, 186, 228);
     }
 
     h1 {
-        color: rgb(185, 228, 56);
+        color: yellow;
         display: block;
         font-size: 24px;
         font-weight: 100;
@@ -33,11 +34,12 @@
         font-size: 16px;
         font-weight: 100;
         line height: 19px;
+        text-transform: capitalize;
     }
      .weather-app {
 
       padding: 20px;
-      border: 1px solid green;
+      border: 1px solid yellow;
       border-radius: 5px;
     }
     .weather-app-wrapper {
@@ -45,7 +47,7 @@
       margin: 30px auto;
     }
     .overview {
-        margin-bottom: 20px;
+        margin-bottom: 50px;
     }
     .weather-temperature img {
         margin-right: 5px;      
@@ -54,7 +56,7 @@
     }
     
     .weather-temperature strong {
-        color: orange;
+        color: rgb(239, 233, 51);
         font-size: 45px;
         line-height: 1;
         font-weight: 400;
@@ -69,17 +71,18 @@ float: right;
 }
   </style>
   <body>
+    
     <div class="container">
       <div class="weather-app-wrapper">
         <div class="weather-app">
             <div class="overview">
           <div class="row">
-            <h1>Uzhhorod</h1>
+            <h1 id="city">Uzhhorod</h1>
             <ul>
               <li>
                 Thursday 12:00
             </li>
-              <li>
+              <li id="description">
                 Clear
             </li>
             </ul>
@@ -93,7 +96,7 @@ float: right;
             class="float-left"
           />
           <div class="float-left">
-          <strong>12</strong>
+          <strong id="temperature"></strong>
         <span class="units">°C | °F</span>
         </div>
         </div>
@@ -101,14 +104,11 @@ float: right;
         
           <div class="col-6">
             <ul class="weather-description-items">
-              <li>
-                Percipitation: 0%
+            <li>
+                Humidity: <span id="humidity"></span>%
             </li>
               <li>
-                Humidity: 73%
-            </li>
-              <li
-              >Wind: 2 km/h
+                Wind: <span id="wind"></span> km/h
             </li>
             </ul>
           </div>
@@ -121,5 +121,35 @@ float: right;
         >by OksanaY
       </small>
     </div>
+    <script>
+
+function displayTemperature(response) {
+
+let cityElement = document.querySelector("#city");
+cityElement.innerHTML = response.data.name;
+
+let temperatureElemement=document.querySelector("#temperature");
+temperatureElemement.innerHTML = Math.round(response.data.main.temp);
+
+let descriptionElement = document.querySelector("#description");
+descriptionElement.innerHTML = response.data.weather[0].description;
+
+let humidityElement = document.querySelector("#humidity");
+humidityElement.innerHTML = response.data.main.humidity;
+
+let windElement = document.querySelector("#wind");
+windElement.innerHTML = Math.round(response.data.wind.speed);
+
+let 
+}
+
+
+let apiKey = "fe80b84fc85eea0c9b1fafa5aa3bbced";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New%20York&appid=${apiKey}&units=metric`;
+    console.log(apiUrl);
+
+    axios.get(apiUrl).then(displayTemperature);
+    
+    </script>
   </body>
 </html>
