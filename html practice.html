@@ -9,15 +9,9 @@
   </head>
   <style>
     body {
-        font-family: arial, sans-serif; 
+        font-family: arial, sans-serif;
     }
-    .weather-app {
-      max-width: 600px;
-      margin: 30px auto;
-      padding: 20px;
-      border: 1px solid green;
-      border-radius: 5px;
-    }
+
     h1 {
         color: rgb(185, 228, 56);
         display: block;
@@ -39,42 +33,93 @@
         font-size: 16px;
         font-weight: 100;
         line height: 19px;
-
     }
+     .weather-app {
+
+      padding: 20px;
+      border: 1px solid green;
+      border-radius: 5px;
+    }
+    .weather-app-wrapper {
+      max-width: 600px;
+      margin: 30px auto;
+    }
+    .overview {
+        margin-bottom: 20px;
+    }
+    .weather-temperature img {
+        margin-right: 5px;      
+        height: 64px;
+        float: left;
+    }
+    
+    .weather-temperature strong {
+        color: orange;
+        font-size: 45px;
+        line-height: 1;
+        font-weight: 400;
+    }
+.weather-temperature units {
+    position: relative;
+    font-size: 16px;
+    top: -32px;
+}
+.weather-description-items {
+float: right;
+}
   </style>
   <body>
-    <div class="container" id="wrapper">
-      <div class="weather-app"> 
-        <div class="row">
-        <h1>Uzhhorod</h1>
-        <ul>
-          <li>Thursday 12:00</li>
-          <li>Clear</li>
-        </ul>
-       </div>
-          <div class="col-sm"></div>
+    <div class="container">
+      <div class="weather-app-wrapper">
+        <div class="weather-app">
+            <div class="overview">
+          <div class="row">
+            <h1>Uzhhorod</h1>
+            <ul>
+              <li>
+                Thursday 12:00
+            </li>
+              <li>
+                Clear
+            </li>
+            </ul>
+            </div>
+          <div class="row">
+          <div class="col-6">
+            <div class="clearfix weather-temperature">
           <img
             src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
             alt="clear"
+            class="float-left"
           />
-          12°C | °F
-          <div class="col-sm">
-          <ul>
-            <li>Percipitation: 0%</li>
-            <li>Humidity: 73%</li>
-            <li>Wind: 2 km/h</li>
-          </ul>
-          <small>
-            <a
-              href="https://github.com/OksanaYur/GitHub-challenge"
-              target="_blank"
-              >Open-source code </a
-            >by OksanaY
-          </small>
+          <div class="float-left">
+          <strong>12</strong>
+        <span class="units">°C | °F</span>
+        </div>
+        </div>
         </div>
         
+          <div class="col-6">
+            <ul class="weather-description-items">
+              <li>
+                Percipitation: 0%
+            </li>
+              <li>
+                Humidity: 73%
+            </li>
+              <li
+              >Wind: 2 km/h
+            </li>
+            </ul>
+          </div>
+        </div>
         </div>
       </div>
+      <small>
+        <a href="https://github.com/OksanaYur/GitHub-challenge" target="_blank"
+          >Open-source code </a
+        >by OksanaY
+      </small>
     </div>
   </body>
 </html>
