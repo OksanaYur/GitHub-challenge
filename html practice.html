@@ -34,7 +34,7 @@
     }
     li {
         list-style: none;
-        color: green;
+        color: yellow;
         margin: 0;
         padding: 0;
         font-size: 16px;
@@ -79,6 +79,15 @@ text-transform: capitalize;
 .weather-description-items {
 float: right;
 }
+
+.weather-temperature .active {
+  color: rgb(142, 237, 33);
+  cursor: default;
+}
+.weather-temperature .active:hover {
+  text-decoration: none;
+  
+}
   </style>
   <body>
     
@@ -90,7 +99,7 @@ float: right;
               <div class="col-9">
                 <input
                   type="search"
-                  placeholder="Enter a city.."
+                  placeholder="Enter a city ..."
                   class="form-control"
                   id="city-input"
                   autocomplete="off"
@@ -129,7 +138,11 @@ float: right;
           />
           <div class="float-left">
           <strong id="temperature"></strong>
-        <span class="units">°C | °F</span>
+        <span class="units">
+          <a href="#" id="celcius-link" class="active">°C</a>
+           | 
+           <a href="#" id="fahrenheit-link">°F</a>
+          </span>
         </div>
         </div>
         </div>
@@ -185,7 +198,7 @@ let cityElement = document.querySelector("#city");
 cityElement.innerHTML = response.data.name;
 
 let temperatureElemement=document.querySelector("#temperature");
-temperatureElemement.innerHTML = Math.round(response.data.main.temp);
+temperatureElemement.innerHTML = Math.round(celciusTemperature);
 
 let descriptionElement = document.querySelector("#description");
 descriptionElement.innerHTML = response.data.weather[0].description;
@@ -202,6 +215,8 @@ dateElement.innerHTML = formatDate(response.data.dt * 1000);
 let iconElement = document.querySelector("#icon");
 iconElement.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+celciusTemperature = response.data.main.temp;
 }
 
 function search(city) {
@@ -216,10 +231,35 @@ function handleSubmit(event) {
   search(cityInputElement.value);
 }
 
-  search("Uzhhorod");  
-    
+function displayFahrenheitTemperature (event) {
+  event.preventDefault();
+  let temperatureElemement = document.querySelector("#temperature");
+  celciusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheitTemperature = (celciusTemperature * 9) / 5 + 32;
+  temperatureElemement.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function displayCelciusTemperature (event) {
+  event.preventDefault();
+  let temperatureElemement = document.querySelector("#temperature");
+  celciusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  temperatureElemement.innerHTML = Math.round(celciusTemperature);
+}
+      
+let celciusTemperature = null;
+
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+let celciusLink = document.querySelector("#celcius-link");
+celciusLink.addEventListener("click", displayCelciusTemperature);
+
+search("Uzhhorod");  
 
     </script>
   </body>
