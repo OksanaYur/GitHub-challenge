@@ -46,7 +46,7 @@ text-transform: capitalize;
       border-radius: 5px;
     }
     .weather-app-wrapper {
-      max-width: 600px;
+      max-width: 400px;
       margin: 30px auto;
     }
     .overview {
@@ -56,11 +56,12 @@ text-transform: capitalize;
         margin-right: 5px;      
         height: 64px;
         float: left;
+        margin-top: 15px;
     }
     
     .weather-temperature strong {
         color: rgb(239, 233, 51);
-        font-size: 45px;
+        font-size: 80px;
         line-height: 1;
         font-weight: 400;
     }
@@ -96,7 +97,8 @@ float: right;
           <img
             src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
             alt="clear"
-            class="float-left"
+            id="icon"
+            cass="float-left"
           />
           <div class="float-left">
           <strong id="temperature"></strong>
@@ -170,12 +172,15 @@ windElement.innerHTML = Math.round(response.data.wind.speed);
 let dateElement = document.querySelector("#date");
 dateElement.innerHTML = formatDate(response.data.dt * 1000);
 
+let iconElement = document.querySelector("#icon");
+iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 
 let apiKey = "fe80b84fc85eea0c9b1fafa5aa3bbced";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New%20York&appid=${apiKey}&units=metric`;
-    console.log(apiUrl);
+let city = "Tokyo";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     axios.get(apiUrl).then(displayTemperature);
     
